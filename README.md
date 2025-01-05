@@ -1,124 +1,174 @@
-# Final Exam
+Tree Comparison Visualizer User Manual
+CSE-411 Advanced Programming Techniques by Prof. Corey Montella
+Author: Sharmili Rudraraju
+Introduction
+The Tree Comparison Visualizer is a visualization software tool designed to help in understanding and compare the behavior of Binary Search Trees (BST) and AVL Trees. This manual provides comprehensive guidance on installing, using, and getting the most out of the visualization tool.
+This application serves as both a learning aid and a practical tool for understanding tree data structures. By providing side-by-side visualization of BST and AVL trees, along with real-time performance metrics, users can gain deep insights into the differences between these fundamental data structures.
+System Requirements and Installation
+Before installing the Tree Comparison Visualizer, ensure your system meets the following requirements:
+The application requires Python 3.7 or higher installed on your computer. It works on Windows. Your display should have a minimum resolution of 1400x900 pixels to properly view all elements of the interface. While the application is lightweight, least 4GB of RAM for smooth operation is recommended, especially during stress testing with larger trees.
+To install the application:
+•	First, ensure Python 3.7 or higher is installed on your system. You can verify this by opening a terminal or command prompt and typing:
+       
+•	The application uses ‘Tkinter’, which typically comes bundled with Python. No additional package installation is required.
+•	Download the source code from the provided repository and extract it to your preferred location.
+•	Navigate to the application directory in your terminal or command prompt.
+•	Launch the application by running:
+       
+•	I have also provided the windows .exe file which is in the ‘dist’ folder. So, you can just download and run the application for Windows
+Understanding the Interface
+Upon launching the Tree Comparison Visualizer, you'll be presented with a clean, intuitive interface divided into several key areas. Let's explore each component in detail.
  
-Due Date: 12/19 EOD
+Main Window Layout
+The main window is organized into three primary sections:
+•	The Control Panel occupies the top portion of the window, providing easy access to all operations and controls. Here you'll find an input field for entering values, along with buttons for various tree operations.
+•	The Visualization Area takes up most of the window space, split into two equal panels. The left panel displays the Binary Search Tree (BST), while the right panel shows the AVL Tree. This side-by-side arrangement allows for easy comparison of how each tree type handles the same operations.
+•	 The Performance Metrics Panel, located at the top of the window, displays real-time statistics about tree operations, including execution times, comparison counts, and for AVL trees, rotation counts.
+Control Panel Features
+The control panel has been designed for intuitive operation. The main input field accepts numerical values for tree operations. Adjacent to this, you'll find several operation buttons: 
+•	The 'Insert' button adds new values to both trees simultaneously. When clicked, the value in the input field is inserted into both the BST and AVL tree, allowing you to observe how each tree handles the insertion. 
+•	The 'Find' button initiates a search operation in both trees. When used, the application highlights the search path in each tree, making it easy to compare how different tree structures affect search efficiency.
+•	The 'Delete' button removes values from both trees. This operation clearly demonstrates the different approaches to maintaining tree structure after node removal. 
+Additional controls include the 'Random' button for inserting random values, a 'Stress' button for performance testing, and a 'Reset' button to clear both trees.
+Understanding Tree Visualization:
+The visualization area uses several visual cues to help understand tree structure and operations: 
+•	Nodes in the BST are displayed in a consistent color scheme, while AVL tree nodes use a gradient coloring system based on node height. This makes it easy to understand the balance characteristics of the AVL tree briefly. 
+•	When operations are performed, the affected paths are highlighted. Search paths are shown in yellow, with the target node (if found) highlighted in green. This makes it easy to follow the operation's progress through the tree. 
+•	Lines connecting nodes (edges) are drawn with different thicknesses and colors depending on whether they're part of an operation's path. This helps visualize the traversal path during operations.
+Basic Operations
+Inserting Values
+To insert a value into the trees:
+•	Type a numeric value into the input field at the top of the window. The application accepts integer values only.
+•	Click the 'Insert' button or press Enter. The value will be inserted into both trees simultaneously.
+•	Observe how each tree handles the insertion. In the BST, the value will be placed according to the binary search tree property - lesser values to the left, greater values to the right. In the AVL tree, you may observe additional rotations to maintain balance.
+•	For example, if you insert the value 50, it becomes the root node in both trees. Following this with 30 and 70 creates a balanced structure in both trees. However, inserting several ascending values (like 80, 90, 100) will demonstrate how the AVL tree maintains balance while the BST becomes increasingly skewed.
+Finding Values
+The find operation demonstrates how each tree structure affects search efficiency:
+•	Enter the value you want to find in the input field.
+•	Click the 'Find' button or press ‘Ctrl+F’.
+•	The application will highlight the search path in both trees. You'll see the path traced from the root to either the found node or the point where the search determines the value doesn't exist.
+ 
+The performance metrics panel will update to show the number of comparisons required by each tree, helping you understand the efficiency differences between balanced and potentially unbalanced trees.
+Deleting Values
+To remove a value from the trees:
+•	Enter the value to delete in the input field.
+•	Click the 'Delete' button or press the Delete key.
+•	Observe how each tree handles the removal and subsequent restructuring.
+The delete operation is particularly interesting as it shows different approaches to maintaining tree structure. The BST performs a simple deletion, while the AVL tree may require additional rotations to maintain balance.
+Advanced Features
+Stress Testing:
+The stress test feature helps understand how trees perform with larger datasets:
+•	Click the 'Stress' button or press ‘Ctrl+T’ to begin the test.
+•	The application will insert 20 random values into both trees.
+•	A progress window shows the test's progress.
+•	Watch how each tree grows and handles the insertions differently.
+During the stress test, pay attention to:
+•	The growing height difference between the trees
+•	The number of rotations performed by the AVL tree
+•	The comparison counts for each tree
+•	The execution times for operations
+Performance Metrics:
+The performance metrics panel provides valuable insights into tree operations:
+For BST:
+•	Number of comparisons performed
+•	Time taken for insertions
+•	Time taken for deletions
+•	Time taken for searches
+•	Total operation count
+For AVL Trees:
+•	Number of comparisons
+•	Number of rotations performed
+•	Operation timing
+•	Balance statistics
+All timing measurements are displayed in microseconds for precision.
+Technical Details
+Tree Implementation:
+The application implements both tree types using a node-based structure:
+The Node class serves as the fundamental building block:
+	 
+The AVL implementation includes additional balance management:
+ 
+Node Positioning Algorithm
+The application employs a sophisticated node positioning algorithm to ensure clear visualization of tree structures. This algorithm handles both sparse and dense trees efficiently.
+The horizontal spacing between nodes is dynamically calculated based on the tree's depth and width. Each level of the tree maintains a list of occupied positions to prevent node overlap. When positioning a new node, the algorithm first attempts to place it at an ideal position (centered below its parent), then adjusts if needed to avoid conflicts with existing nodes.
+For example, when you have a balanced tree with seven nodes, the positioning ensures that:
+•	The root node is centered in its display area
+•	Level 1 nodes (children of root) are evenly spaced on either side
+•	Level 2 nodes maintain proper spacing without overlap
+•	All parent-child relationships are clearly visible through connecting lines
+Performance Metrics System
+The performance metrics system provides real-time insights into tree operations. The system tracks:
+Time Measurements
+Each operation is precisely timed using high-resolution performance counters:
+ 
+The metrics panel displays:
+•	Average operation times in microseconds
+•	Number of comparisons performed
+•	Number of rotations (for AVL trees)
+•	Total operation counts
+These measurements help users understand the performance characteristics of each tree type under different scenarios.
 
-Modules
+Common Issues and Solutions
+Application Performance
+If you experience slow performance:
+1. Large Trees
+   - Symptom: Slow updates during operations
+   - Solution: Reset trees periodically when testing
+   - Prevention: Use smaller datasets for demonstrations
 
-1. Data structures
-3. Parallel programming
-4. GUIs
-5. Alternative programming paradigms
+2. Visual Glitches
+   - Symptom: Overlapping nodes or unclear connections
+   - Solution: Resize window to trigger layout update
+   - Prevention: Maintain reasonable tree sizes
+Operation Errors
+1. Invalid Input
+   - Symptom: Operation buttons not responding
+   - Check: Ensure input is a valid integer
+   - Solution: Clear input field and retry
 
-Combine at least two modules in a single project. Project ideas:
+2. Deletion Problems
+   - Symptom: Node not removed as expected
+   - Check: Verify value exists in tree
+   - Solution: Use find operation to confirm node presence
 
-### Data Structures and Parallel Programming: High-Performance Data Processing System
-
-Develop a system that utilizes advanced data structures to efficiently process large datasets in parallel. This project can explore the use of trees, graphs, or custom data structures optimized for parallel processing on multi-core systems or GPUs.
-
-### Networking and User Interfaces: Collaborative Real-Time Data Visualization Tool
-
-Create a web-based tool that allows users to collaboratively visualize and manipulate large datasets in real time. This project would combine networking to manage real-time data transmission between users and user interface design for creating intuitive and responsive data visualization tools.
-
-### Parallel Programming and Reactive Programming: Distributed Stream Processing Framework
-
-Design a framework that leverages reactive programming principles to handle stream processing in a distributed, parallel environment. This could be particularly useful for real-time analytics in scenarios like financial markets, social media trend analysis, or IoT sensor data processing.
-
-### Data Structures and Functional Programming: Immutable Data Structure Library
-
-Develop a comprehensive library of immutable data structures using functional programming principles. This project focuses on creating efficient, thread-safe data structures that are essential in concurrent programming.
-
-### User Interfaces and Alternative Programming Paradigms (Logic Programming): Intelligent UI Design Assistant
-
-Create an intelligent tool that assists in UI design by using logic programming to understand user requirements and generate UI mockups. This project can explore how alternative programming paradigms like logic programming can be applied to create intuitive and adaptive user interfaces. 
-
-### Networking and Data Structures: Optimized Network Routing Algorithm Simulator
-
-Build a simulator for testing and analyzing network routing algorithms. This project would involve using advanced data structures to efficiently model network topologies and simulate various routing algorithms under different conditions.
-
-### Parallel Programming and Networking: High-Speed Network Traffic Analyzer
-
-Develop a tool that uses parallel programming techniques to analyze high-speed network traffic in real time. This project could explore methods for efficiently processing and visualizing large amounts of network data using parallel computation.
-
-## Assignment Description
-
-For your final project in Advanced Programming Techniques, you will demonstrate your ability to apply advanced programming concepts in a practical project. The project consists of three parts:
-
-- Software Deliverable: The functional software that meets the project requirements.
-- Written Deliverable: A comprehensive written document that either presents a detailed technical paper or a user manual, depending on the nature of your project.
-- Oral Deliverable: A video demonstration where you present your software, explain key aspects of its design and functionality, and discuss the challenges encountered during development.
-
-### Part 1: Software Deliverable
-
-Your software project should meet the technical specifications outlined in the project guidelines. It must be fully functional, well-documented, and demonstrate an understanding of advanced programming techniques such as object-oriented design, algorithm optimization, or multi-threading.
-
-### Part 2: Written Deliverable
-
-#### A. Technical Paper (For Computer Science Experiment Projects)
-
-If your project is a computer science experiment (e.g., comparing the performance of different data structures or algorithms under various conditions), your written deliverable should be a technical paper. This paper should provide an in-depth analysis of the experiment, including:
-
-- Abstract: A concise summary of your project, including the problem you are addressing, your methodology, and key results.
-
-- Introduction: An introduction to the problem, the motivation for the experiment, and the goals of your research.
-
-- Literature Review: An overview of existing work or related research in the area of study. This can include algorithms or data structures similar to those you are comparing.
-
-- Methodology: A detailed description of how the experiment was set up, including data sets, algorithms, and performance metrics used.
-
-- Results and Discussion: Present the results of your experiment, including graphs, and performance analyses. Discuss your findings and any anomalies or unexpected results.
-
-- Conclusion: Summarize the findings of the experiment, and propose potential directions for future research.
-
-- References: Cite all sources, papers, or documentation you referenced while preparing your project.
-
-#### B. User Manual (For Software Deliverables)
-
-If your project is primarily a software deliverable (e.g., a tool or application), your written deliverable should be a user manual. This manual should serve as a guide for users who want to install and use your software. It should include:
-
-- Title Page: Include the name of your software, your name, and the course details.
-- Introduction: Provide an overview of your software, including its purpose, key features, and target audience.
-- Installation Instructions: Provide clear, step-by-step instructions for installing your software, including prerequisites, dependencies, and troubleshooting tips.
-- Features and Usage: Describe the main features of your software. Include detailed instructions on how to use the software, with examples and screenshots.
-- Screenshots and Diagrams: Include relevant screenshots to help users understand the software interface and features.
-- System Requirements: Specify the hardware and software requirements to run the software.
-- Program Design and Architecture - talk about how the program is designed and built internally.
-- References: Cite all sources, papers, or documentation you referenced while preparing your project.
-
-### Part 3: Oral Deliverable
-
-The oral deliverable is a video presentation where you will:
-
-- Introduce Your Project: Start by introducing your software and its purpose. Explain what problem it addresses and why it is important or relevant.
-- Walk Through the Software: Demonstrate your software in action, showing how it works and highlighting key features.
-  - For software projects, this includes demonstrating the core functionality, explaining how the user interacts with the software, and showing any advanced features or configurations.
-  - For experimental projects, walk through the key components of your experiment (e.g., code implementation, algorithm comparison, or data collection process).
-- Explain Key Design Decisions: Discuss the critical decisions made during the design and development process. This could include:
-    - Design patterns or architecture choices
-    - Algorithm selection or performance considerations
-    - Challenges faced during development and how you overcame them
-    - Any trade-offs made during implementation (e.g., simplicity vs. performance)
--Demonstrate Key Issues: Identify any major issues or challenges you faced during the project. Discuss how you addressed these challenges and what you learned from them.
-- Conclude the Presentation: Summarize the key points of your project, including any lessons learned or future improvements you plan to make. Discuss the potential impact of your project and any applications it could have.
-
-The video should be 5-15 minutes in length and should showcase your communication skills, technical knowledge, and ability to clearly explain complex concepts. The video should be clear, well-organized, and professional.
-
-You can use Zoom to do this. You don't have to record your face, only your voice and the screen. Go through the answer and explain how you arrived there. Your goal with this is to convince me you know what you are talking about, so I want you to do this without reading a script or written answer. Just go through and explain what your project does. When you are done, upload your recording to your Lehigh Drive and add a link below.
-
-⚠️IMPORTANT: Make sure you give blanket permission to the link holder to view the file
-
-## Submission
-
-Please submit your completed exam, which should include:
-
-- Source code for your project.
-- Your written report.
-- A link to your oral report.
-
-Also, keep in mind:
-
-- Only files under version control in your forked assignment repository will be graded. Local files left untracked on your computer will not be considered.
-- Only code committed and pushed prior to the time of grading will be accepted. Locally committed but unpushed code will not be considered.
-- Your assignment will be graded according to the [Programming Assignment Grading Rubric](https://drive.google.com/open?id=1V0nBt3Rz6uFMZ9mIaFioLF-48DFX0VdkbgRUDM_eIFk).
-- Your submission should be organized, well-commented, and easy to understand. Remember to document any assumptions you made during the implementation process, as well as any limitations of your solution. Your final exam will be graded on the correctness, completeness, and clarity of your submission.
-
+Best Practices
+For Educational Use:
+1. Start Simple
+   - Begin with small trees (5-7 nodes)
+   - Demonstrate basic properties before complex operations
+   - Use step-by-step insertion sequences
+2. Demonstrate Contrasts
+   - Show balanced vs unbalanced scenarios
+   - Compare search paths in different tree shapes
+   - Highlight performance differences
+For Performance Testing:
+1. Systematic Testing
+   - Use consistent test patterns
+   - Record and compare metrics
+   - Test edge cases and typical scenarios
+2. Data Management
+   - Regular tree resets
+   - Structured test sequences
+   - Documented test cases
+Keyboard Shortcuts
+The application supports various keyboard shortcuts for efficient operation:
+Shortcut	Action	Description
+Enter	Insert       	Adds current value to trees
+Delete    	Remove       	Deletes current value
+Ctrl+F    	Find         	Searches for current value           
+Ctrl+R    	Random       	Inserts random value                 
+Ctrl+T    	Stress Test  	Runs performance test                
+Escape    	Reset        	Clears both trees                    
+Performance Specifications
+Optimal operating parameters:
+- Maximum recommended nodes: 100 per tree
+- Minimum node spacing: 50 pixels
+- Recommended window size: 1400x900 pixels
+- Maximum stress test size: 20 nodes
+References:
+https://docs.python.org/3/
+https://tkdocs.com/
+https://www.geeksforgeeks.org/complexity-different-operations-binary-tree-binary-search-tree-avl-tree/
+https://github.com/kousheekc/Interactive-Visual-Binary-Search-Tree
+https://github.com/nahrens007/BinarySearchTreeGui
 
